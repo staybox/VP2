@@ -32,10 +32,6 @@ class Bootstrap
         if (!empty($_GET['edit_user_id'])) {
             $controllers = new UserController();
 
-            if (!empty($_FILES)) {
-                // $controllers->update($_POST);
-            }
-
             if (!empty($_POST)) {
                 $controllers->update($_POST);
                 return 0;

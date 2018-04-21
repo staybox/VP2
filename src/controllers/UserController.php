@@ -31,8 +31,6 @@ class UserController extends MainController
                 'error'   => $array
             ]]);
 
-
-        //$this->view->render('home', ['error' => $array], $currentPage);
     }
 
     public function edit($userId)
@@ -46,7 +44,6 @@ class UserController extends MainController
             'pageData' => [
                 'user'   => $user
             ]]);
-        //$this->view->render('edit', ['user' => $user]);
     }
 
     public function update(array $data)
@@ -92,7 +89,6 @@ class UserController extends MainController
             echo "Данные пользователя не были обновлены";
         }
 
-        // редирект на список пользователей
     }
 
     public function checkAuth()
@@ -124,13 +120,12 @@ class UserController extends MainController
             header("Location: /filelist.php");
         }
         $loader = new Twig_Loader_Filesystem('src/views');
-        $twig = new Twig_Environment($loader); //, array('cache' => 'src/views')
-
+        $twig = new Twig_Environment($loader);
         echo $twig->render('reg.php',[
             'pageData' => [
                 'regPage'   => $activePage
             ]]);
-        //$this->view->render('reg', [], $currentPage);
+
     }
 
 
@@ -147,28 +142,12 @@ class UserController extends MainController
         $users = $userModel->getAllUsers();
         $loader = new Twig_Loader_Filesystem('src/views');
         $twig = new Twig_Environment($loader);
-        //var_dump($users[0]['AGE']);
-        /*$users[0]['AGE']." Несо
-        foreach ($users as $key => $user) {
-            $users[$key]['AGE'] = $user['AGE'] . (($users[$key]['AGE'] > 18) ? " Совершеннолетний" : " Несовершеннолетний");
-        }*//*
-        if($users[0]['AGE'] > 18)
-        {
-            $users[0]['AGE'] += $users[0]['AGE']." Совершеннолетний";
-        }else{
-            $users[0]['AGE'] = вершеннолетний";
-        }*/
-
 
             echo $twig->render('list.php',[
                 'pageData' => [
                     'listPage'   => $activePage,
                     'modelUsers' => $users
                 ]]);
-
-
-        // Рендер страницы и передача туда массива из базы данных
-        //$this->view->render('list', ['users' => $users], $currentPage);
     }
 
     public function filelist()
@@ -183,7 +162,7 @@ class UserController extends MainController
         $modelShowFiles = new User();
         $modelfiles = $modelShowFiles->getFiles();
         $loader = new Twig_Loader_Filesystem('src/views');
-        $twig = new Twig_Environment($loader); //, array('cache' => 'src/views')
+        $twig = new Twig_Environment($loader);
 
         echo $twig->render('filelist.php',[
             'pageData' => [
@@ -191,15 +170,13 @@ class UserController extends MainController
                 'modelFiles' => $modelfiles
             ]]);
 
-        //$this->view->render('filelist', ['modelfiles' => $modelfiles], $currentPage);
     }
 
     public function removeImage()
     {
         $userModel = new User();
         $userModel->removePic($_GET['remove_userpic']);
-        //var_dump($userModel);
-        //exit();
+
         header("Location: /filelist.php");
     }
 
@@ -254,8 +231,7 @@ class UserController extends MainController
                 $replace = "http://" . $_SERVER['SERVER_NAME'] . ":81/upload/" . md5($_POST['login']);
                 $data['photo'] = $replace;
                 $data['photo_name'] = md5($_POST['login']);
-
-                //$data['photo'] = $uploadfile;
+                
             }
         }
 
